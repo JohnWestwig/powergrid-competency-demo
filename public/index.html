@@ -7,7 +7,7 @@
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4) {
             if (this.status == 200) {
-              document.getElementById("result").innerHTML = "SUCCESS";
+              document.getElementById("result").innerHTML = "SUCCESS" + this.responseText;
             } else if (this.status == 403) {
               document.getElementById("result").innerHTML = "FAILURE: Insufficient Permissions"
             } else if (this.status == 401) {
