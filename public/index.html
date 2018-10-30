@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function handleClick(action) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              document.getElementById("result").innerHTML = "SUCCESS";
+            } else if (this.status == 403) {
+              document.getElementById("result").innerHTML = "FAILURE: Insufficient Permissions"
+            } else if (this.status == 401) {
+              document.getElementById("result").innerHTML = "FAILURE: Unauthorized"
+            }
+          }
+        };
+        xhttp.open("GET", "/crosswords?role=" + document.getElementById('roleSelector').value + '&action=' + action, true);
+        xhttp.send();
+      }
+    </script>
+  </head>
+  <body>
+    <select id="roleSelector">
+      <option>None</option>
+      <option>Constructor</option>
+      <option>Editor</option>
+      <option>Admin</option>
+    </select>
+    <br/>
+    <button onClick="handleClick('createOwn')">Create crossword</button>
+    <br/>
+    <button onClick="handleClick('readOwn')">See own crossword</button>
+    <button onClick="handleClick('readAny')">See any crossword</button>
+    <br/>
+    <button onClick="handleClick('deleteOwn')">Delete own crossword</button>
+    <button onClick="handleClick('deleteAny')">Delete any crossword</button>
+    <br/>
+    <button onClick="handleClick('updateOwn')">Edit own crossword</button>
+    <button onClick="handleClick('updateAny')">Edit any crossword</button>
+    <br>
+    <p id="result"></p>
+  </body>
+</html>
